@@ -2,23 +2,13 @@ package main
 
 import (
 	"bufio"
-	"errors"
 	"fmt"
 	"os"
 	"strconv"
 )
 
-type meow string
-
-func (meow) Write(p []byte) (int, error) {
-	fmt.Println(len(p))
-	return 0, errors.New("bufffeerrrrrr")
-}
-
-var m meow = ""
-
 var reader *bufio.Reader = bufio.NewReader(os.Stdin)
-var writer *bufio.Writer = bufio.NewWriterSize(m, 4)
+var writer *bufio.Writer = bufio.NewWriter(os.Stdout)
 
 func printf(f string, a ...interface{}) (n int, err error) {
 	return fmt.Fprintf(writer, f, a...)
