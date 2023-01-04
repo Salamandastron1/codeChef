@@ -10,8 +10,10 @@ func main() {
 	}
 	fmt.Println(t)
 	for i := 0; i < t; i++ {
-		fmt.Printf("Iteration number %d\n", i)
-		fmt.Scan(&n)
+		_, err = fmt.Scan(&n)
+		if err != nil {
+			panic(err)
+		}
 		fmt.Printf("%d\n", sum(n))
 	}
 }
@@ -22,7 +24,6 @@ func sum(n int) int {
 	for n != 0 {
 		first = n % 10
 		n = n / 10
-		fmt.Println(n)
 	}
 	return first + last
 }
