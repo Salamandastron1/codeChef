@@ -8,7 +8,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(t)
 	for i := 0; i < t; i++ {
 		_, err = fmt.Scan(&n)
 		if err != nil {
