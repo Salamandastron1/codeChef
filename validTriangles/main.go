@@ -4,22 +4,24 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
 
 func main() {
-	var t, a, b, c int
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
-	r := strings.NewReader(scanner.Text())
-	fmt.Fscanf(r, "%d", &t)
+	numLines, _ := strconv.Atoi(strings.TrimSpace(scanner.Text()))
 
-	for i := 0; i < t; i++ {
+	for i := 0; i < numLines; i++ {
+		var sumAngles int
 
 		scanner.Scan()
-		r = strings.NewReader(scanner.Text())
-		fmt.Fscanf(r, "%d %d %d", &a, &b, &c)
-		if (a + b + c) == 180 {
+		for _, v := range strings.Split(scanner.Text(), " ") {
+			num, _ := strconv.Atoi(v)
+			sumAngles += num
+		}
+		if sumAngles == 180 {
 			fmt.Println("YES")
 		} else {
 			fmt.Println("NO")
