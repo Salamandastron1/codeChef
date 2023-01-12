@@ -4,43 +4,28 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
 )
 
-type coldDayTuple struct {
-	first  int
-	second int
-}
-
 func main() {
-	var coldDays coldDayTuple
+	// an iterator counter for later
 	s := bufio.NewScanner(os.Stdin)
+	// don't need the num lines
+	// will rely on scanner tokens
 	s.Scan()
-	numLines := parseInt(s.Text())
 
-	for i := 0; i < numLines; i++ {
+	for s.Scan() {
+		// don't actually need number of elements
+		// so scan past
 		s.Scan()
-		s.Scan()
-		for i, v := range strings.Split(s.Text(), " ") {
-			num := parseInt(v)
-			if i == 0 {
-				coldDays.first = num
-				continue
-			}
-			if coldDays.first > num {
-				coldDays.second = coldDays.first
-				coldDays.first = num
-				continue
-			}
-			if i == 1 {
-				coldDays.second = num
-			}
-
-		}
-		fmt.Println(coldDays.second)
+		temps := strings.Split(s.Text(), " ")
+		sort.Slice(temps, func(i, j int) bool {
+			return parseInt(temps[i]) < parseInt(temps[j])
+		})
+		fmt.Println(parseInt(temps[1]))
 	}
-
 }
 
 func parseInt(s string) int {
