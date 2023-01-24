@@ -17,14 +17,16 @@ func main() {
 	s.Scan()
 
 	for s.Scan() {
-		// don't actually need number of elements
-		// so scan past
+		n := parseInt(s.Text())
+		arr := make([]int, n, n)
 		s.Scan()
 		temps := strings.Split(s.Text(), " ")
-		sort.Slice(temps, func(i, j int) bool {
-			return parseInt(temps[i]) < parseInt(temps[j])
-		})
-		fmt.Println(parseInt(temps[1]))
+		for i := 0; i < n; i++ {
+			arr[i] = parseInt(temps[i])
+		}
+
+		sort.Ints(arr)
+		fmt.Println(arr[1])
 	}
 }
 
