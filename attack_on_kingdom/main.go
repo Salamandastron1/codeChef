@@ -10,7 +10,6 @@ import (
 )
 
 func main() {
-	// an iterator counter for later
 	s := bufio.NewScanner(os.Stdin)
 	// don't need the num lines
 	// will rely on scanner tokens
