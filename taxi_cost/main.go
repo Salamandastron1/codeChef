@@ -18,13 +18,23 @@ func scanf(f string, a ...interface{}) (n int, err error) {
 
 func main() {
 	defer writer.Flush()
-	var T int
-	var a, b, c, d, e, f, g int
+	var T, n, x, c int
 	scanf("%d\n", &T)
-
 	for T > 0 {
-		scanf("%d %d %d %d %d %d %d\n", &a, &b, &c, &d, &e, &f, &g)
-		printf("%d\n", ((a/2)+(a%2))*(b+c+d+e+f+g))
+		scanf("%d %d\n", &n, &x)
+		days := make([]int, n, n)
+		for i := 0; i < n; i++ {
+			scanf("%d\n", &days[i])
+			if days[i] > 0 {
+				c += x
+				continue
+			}
+			if i > 0 && days[i-1] == 1 {
+				c += x
+			}
+		}
+		printf("%d\n", c)
+		c = 0
 		T--
 	}
 }
