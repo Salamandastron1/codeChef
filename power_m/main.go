@@ -2,15 +2,13 @@ package main
 
 import (
 	"bufio"
-	"bytes"
 	"fmt"
 	"math"
 	"os"
 )
 
 func main() {
-	var M int
-	var X []byte
+	var X, M int
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Split(bufio.ScanWords)
 	scanner.Scan()
@@ -18,20 +16,21 @@ func main() {
 
 	for t > 0 {
 		scanner.Scan()
-		X = scanner.Bytes()
+		X = toInt(scanner.Bytes())
 		scanner.Scan()
 		M = toInt(scanner.Bytes())
-
-		for i, v := range X {
-			X[i] = byte(int(math.Pow(float64(v-'0'), float64(M)))%10) + '0'
+		sum := 0
+		for X > 0 {
+			d := X % 10
+			z := M % 4
+			if z == 0 && M != 0 {
+				z = 4
+			}
+			d = int(math.Pow(float64(d), float64(z)))
+			sum = sum*10 + d%10
+			X = X / 10
 		}
-		for i := 0; i < (len(X) / 2); i++ {
-			X[i], X[len(X)-i-1] = X[len(X)-i-1], X[i]
-		}
-
-		X = bytes.TrimLeft(X, "0")
-		fmt.Println(X, toInt(X))
-		if toInt(X)%7 == 0 {
+		if sum%7 == 0 {
 			fmt.Println("YES")
 		} else {
 			fmt.Println("NO")
