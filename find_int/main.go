@@ -7,6 +7,7 @@ import (
 )
 
 func main() {
+	var m any
 	var x int
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
